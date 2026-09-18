@@ -1,6 +1,8 @@
-# 学习仓库（CS 自学）
+# JinWu-Heart · CS 自学学习仓库
 
-我的计算机自学仓库。参考路线：[CS 自学指南（csdiy.wiki）](https://csdiy.wiki/)
+这是我初入 GitHub 创建的第一个仓库。在这里，我将记录我的学习过程。
+
+参考路线：[CS 自学指南（csdiy.wiki）](https://csdiy.wiki/)
 
 ## 目标
 
@@ -65,3 +67,4 @@ py -m pip install <包名>
 | 日期 | 学了什么 | 产出了什么 | 卡在哪 | 下一步 |
 |---|---|---|---|---|
 | 2026-09-18 | 清理 C 盘（3.1GB→28.6GB）、装 Git、修好 `py` 命令、初始化本仓库 | 本仓库第一次提交 | 无 | 开始 MIT Missing Semester 视频 |
+
