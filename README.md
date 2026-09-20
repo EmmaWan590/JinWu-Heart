@@ -118,6 +118,32 @@ py -0p
 1. **提交前必须 `git status`**：`git commit` 提交的是**整个暂存区**，不只是你刚 `git add` 的那一个文件。
 2. **推送后向服务器核实**：`git ls-remote origin refs/heads/main`，与本地哈希对一下——本地说"推了"不算，服务器说了才算。
 
+**代理相关（2026-09-20 实际踩过）**
+
+本机代理在 `127.0.0.1:10808`。**git 不认代理软件的"系统代理"开关**，必须单独配：
+
+```powershell
+# 只让访问 github.com 时走代理（不影响别的仓库）
+git config --global http.https://github.com.proxy http://127.0.0.1:10808
+
+# 查看当前配置
+git config --global --get http.https://github.com.proxy
+
+# 撤销（比如代理软件不再使用后）
+git config --global --unset http.https://github.com.proxy
+```
+
+症状对照（一眼判断是哪种故障）：
+
+| 报错原文 | 真正的含义 |
+|---|---|
+| `Failed to connect to github.com:443 after X ms` | 直连被阻断 → 代理**没配**或代理软件没开 |
+| `Failed to connect to 127.0.0.1:10808` / `proxy CONNECT aborted` | 代理配了，但**代理软件没开** → 打开它，或撤销配置 |
+| `Recv failure: Connection was reset` | 连接被重置 → 先重试，再确认代理已生效 |
+| `Authentication failed` | 网络是通的，是 GitHub 凭据的问题 |
+
+> **核心认知**：`浏览器能打开 GitHub` ≠ `git 能连上 GitHub`。浏览器走系统代理，git 只认 `http.proxy` 配置。这两件事互不相干。
+
 ## 环境自检（开完终端先花 3 秒）
 
 | 检查什么 | 命令 | 期望结果 |
