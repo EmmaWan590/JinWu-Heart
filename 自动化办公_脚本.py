@@ -17,3 +17,13 @@ print("从今天开始")
 #8  汇报    打印"成功 N / 失败 K"，失败清单落盘      ← 你漏了
 #9  展示    可视化                                 ← 你的"展示"，今天划掉
 #这是cline修改并补充的
+from pathlib import Path
+import pandas as pd
+
+excel_path = Path(r"E:\Practice_Forms.xlsx")
+data = pd.read_excel(excel_path, sheet_name="Sheet1", header=1)
+
+print(data)
+
+summary = data.groupby("出售该商品的店铺所在区")[["上月售出份额", "净利润（单位：k）"]].sum()
+print(summary)
